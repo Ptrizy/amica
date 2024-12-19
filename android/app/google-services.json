@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "665014341644",
+    "firebase_url": "https://amicam-multi-default-rtdb.firebaseio.com",
+    "project_id": "amicam-multi",
+    "storage_bucket": "amicam-multi.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:665014341644:android:230c38f59b898ed3e55e29",
+        "android_client_info": {
+          "package_name": "com.example.amica"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsLrKiPeDdPdITmcWm2ErNBwx4iySB6tY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
