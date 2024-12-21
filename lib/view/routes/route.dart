@@ -1,4 +1,5 @@
 import 'package:amica/view/routes/route_path.dart';
+import 'package:amica/view/screens/favorites_screen.dart';
 import 'package:amica/view/screens/home_screen.dart';
 import 'package:amica/view/screens/login_screen.dart';
 import 'package:amica/view/screens/onboarding_screen.dart';
@@ -14,4 +15,5 @@ final Map<String, WidgetBuilder> amicaRoutes = {
   RoutePath.registerScreen: (context) => const RegisterScreen(),
   RoutePath.homeScreen: (context) => const HomeScreen(),
   RoutePath.petDescScreen: (context) => const PetDescScreen(),
+  RoutePath.favoritesScreen: (context) => const FavoritesScreen(),
 };

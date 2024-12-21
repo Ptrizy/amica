@@ -27,9 +27,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //ngeload data pet saat app mau mulai
-    context.read<PetProvider>().loadPets();
-
     return ScreenUtilInit(
       designSize: const Size(393, 852),
       minTextAdapt: true,

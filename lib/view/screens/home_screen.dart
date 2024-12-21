@@ -1,4 +1,5 @@
 import 'package:amica/model/pet_model.dart';
+import 'package:amica/view/provider/auth_provider.dart';
 import 'package:amica/view/provider/pet_provider.dart';
 import 'package:amica/view/routes/route_path.dart';
 import 'package:amica/view/styles/color_styles.dart';
@@ -36,10 +37,172 @@ class HomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         SvgPicture.asset('assets/small_logo.svg'),
-                        Image.asset(
-                          'assets/placeholder_profile.png',
-                          width: 50.w,
-                          height: 51.h,
+                        GestureDetector(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.r),
+                                  ),
+                                  contentPadding: EdgeInsets.zero,
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      InkWell(
+                                        onTap: () {
+                                          Navigator.pop(context);
+                                          Navigator.pushNamed(context,
+                                              RoutePath.favoritesScreen);
+                                        },
+                                        child: Container(
+                                          margin: EdgeInsets.only(
+                                              top: 24.h, bottom: 12.h),
+                                          decoration: BoxDecoration(
+                                            color: const Color(0xFFFCE7A7),
+                                            borderRadius:
+                                                BorderRadius.circular(8.r),
+                                          ),
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 12.h, horizontal: 24.w),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Icon(
+                                                Icons.favorite,
+                                                color: ColorStyles.secondary,
+                                                size: 24.sp,
+                                              ),
+                                              SizedBox(width: 12.w),
+                                              Text(
+                                                'Favorit',
+                                                style: GoogleFonts.dynaPuff(
+                                                  fontSize: 14.sp,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: ColorStyles.black,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          Navigator.pop(context);
+
+                                          showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.r),
+                                                ),
+                                                title: Text(
+                                                  'Konfirmasi Logout',
+                                                  style: GoogleFonts.dynaPuff(
+                                                    fontSize: 18.sp,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: ColorStyles.black,
+                                                  ),
+                                                ),
+                                                content: Text(
+                                                  'Apakah Anda yakin ingin keluar?',
+                                                  style: GoogleFonts.dynaPuff(
+                                                    fontSize: 14.sp,
+                                                    fontWeight: FontWeight.w400,
+                                                    color: ColorStyles.black,
+                                                  ),
+                                                ),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(context),
+                                                    child: Text(
+                                                      'Batal',
+                                                      style:
+                                                          GoogleFonts.dynaPuff(
+                                                        fontSize: 14.sp,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        color: ColorStyles
+                                                            .neutral600,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      context
+                                                          .read<AuthProvider>()
+                                                          .logout();
+
+                                                      Navigator
+                                                          .pushNamedAndRemoveUntil(
+                                                        context,
+                                                        RoutePath.loginScreen,
+                                                        (route) => false,
+                                                      );
+                                                    },
+                                                    child: Text(
+                                                      'Logout',
+                                                      style:
+                                                          GoogleFonts.dynaPuff(
+                                                        fontSize: 14.sp,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        color: Colors.red,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
+                                        },
+                                        child: Container(
+                                          margin: EdgeInsets.only(
+                                              top: 12.h, bottom: 24.h),
+                                          decoration: BoxDecoration(
+                                            color: const Color(0xFFFCE7A7),
+                                            borderRadius:
+                                                BorderRadius.circular(8.r),
+                                          ),
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 12.h, horizontal: 24.w),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Icon(
+                                                Icons.logout,
+                                                color: Colors.red,
+                                                size: 24.sp,
+                                              ),
+                                              SizedBox(width: 12.w),
+                                              Text(
+                                                'Logout',
+                                                style: GoogleFonts.dynaPuff(
+                                                  fontSize: 14.sp,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.red,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                          child: Image.asset(
+                            'assets/placeholder_profile.png',
+                            width: 50.w,
+                            height: 51.h,
+                          ),
                         )
                       ],
                     ),
@@ -176,6 +339,28 @@ class PetCard extends StatelessWidget {
                   width: 20,
                   height: 20,
                   fit: BoxFit.fill,
+                ),
+              ),
+              Positioned(
+                top: 5,
+                right: 4,
+                child: GestureDetector(
+                  onTap: () {
+                    context.read<PetProvider>().toggleFavorite(pet);
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(4.w),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(4.r),
+                    ),
+                    child: Icon(
+                      pet.isFavorite ? Icons.favorite : Icons.favorite_border,
+                      color:
+                          pet.isFavorite ? Colors.red : ColorStyles.neutral600,
+                      size: 20.sp,
+                    ),
+                  ),
                 ),
               ),
               Positioned(

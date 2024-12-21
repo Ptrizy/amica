@@ -3,6 +3,7 @@ class Pet {
   final String description;
   final String image;
   final bool isMale;
+  final bool isFavorite;
   final String nama;
   final String registered;
   final String title;
@@ -12,6 +13,7 @@ class Pet {
     required this.description,
     required this.image,
     required this.isMale,
+    required this.isFavorite,
     required this.nama,
     required this.registered,
     required this.title,
@@ -23,6 +25,7 @@ class Pet {
       description: json['description'] ?? '',
       image: json['image'] ?? '',
       isMale: json['isMale'] ?? false,
+      isFavorite: json['isFavorite'] ?? false,
       nama: json['nama'] ?? '',
       registered: json['registered'] ?? '',
       title: json['title'] ?? '',

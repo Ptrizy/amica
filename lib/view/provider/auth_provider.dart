@@ -10,6 +10,8 @@ class AuthProvider extends ChangeNotifier {
   String? get error => _error;
   User? get currentUser => _auth.currentUser;
 
+  Stream<User?> get authStateChanges => _auth.authStateChanges();
+
   Future<bool> registerUser({
     required String email,
     required String password,

@@ -7,4 +7,5 @@ class RoutePath {
   static const String registerScreen = '/register';
   static const String homeScreen = 'home';
   static const String petDescScreen = '/pet-desc';
+  static const String favoritesScreen = '/fav';
 }

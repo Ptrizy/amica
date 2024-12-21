@@ -28,6 +28,33 @@ class PetProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> toggleFavorite(Pet pet) async {
+    try {
+      final petIndex = _pets.indexWhere((p) => p.nama == pet.nama);
+      if (petIndex != -1) {
+        final updatedPet = Pet(
+          breed: pet.breed,
+          description: pet.description,
+          image: pet.image,
+          isMale: pet.isMale,
+          isFavorite: !pet.isFavorite,
+          nama: pet.nama,
+          registered: pet.registered,
+          title: pet.title,
+        );
+
+        await _db.child(petIndex.toString()).update({
+          'isFavorite': updatedPet.isFavorite,
+        });
+
+        _pets[petIndex] = updatedPet;
+        notifyListeners();
+      }
+    } catch (e) {
+      print('Error toggling favorite: $e');
+    }
+  }
+
   void setSelectedPet(Pet pet) {
     _selectedPet = pet;
     notifyListeners();
